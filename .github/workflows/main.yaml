@@ -21,6 +21,7 @@ jobs:
           # On utilise la version 11 avec la distribution adopt
           java-version: '11'
           distribution: 'adopt'
+          cache: 'maven'
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -70,6 +71,7 @@ jobs:
       - name: Build image and push backend
         uses: docker/build-push-action@v2
         with:
+
           # relative path to the place where source code with Dockerfile is located
           context: ./API/simple-api
           # Note: tags has to be all lower-case
