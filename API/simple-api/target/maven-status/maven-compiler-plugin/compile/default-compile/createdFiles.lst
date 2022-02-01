@@ -1,0 +1,13 @@
+fr/takima/training/simpleapi/dao/StudentDAO.class
+fr/takima/training/simpleapi/SimpleApiApplication.class
+fr/takima/training/simpleapi/entity/Student.class
+fr/takima/training/simpleapi/entity/Student$Builder.class
+fr/takima/training/simpleapi/entity/Department.class
+fr/takima/training/simpleapi/controller/GreetingController.class
+fr/takima/training/simpleapi/dao/DepartmentDAO.class
+fr/takima/training/simpleapi/service/DepartmentService.class
+fr/takima/training/simpleapi/service/StudentService.class
+fr/takima/training/simpleapi/controller/DepartmentController.class
+fr/takima/training/simpleapi/controller/StudentController.class
+fr/takima/training/simpleapi/controller/GreetingController$Greeting.class
+fr/takima/training/simpleapi/entity/Department$Builder.class

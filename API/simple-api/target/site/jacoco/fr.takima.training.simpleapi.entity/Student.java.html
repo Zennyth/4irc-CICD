@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Student.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">simple-api</a> &gt; <a href="index.source.html" class="el_package">fr.takima.training.simpleapi.entity</a> &gt; <span class="el_source">Student.java</span></div><h1>Student.java</h1><pre class="source lang-java linenums">package fr.takima.training.simpleapi.entity;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = &quot;students&quot;)
+<span class="fc" id="L9">public class Student {</span>
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Size(max = 20)
+    @Column(name = &quot;first_name&quot;)
+    private String firstname;
+
+    @NotNull
+    @Size(max = 30)
+    @Column(name = &quot;last_name&quot;)
+    private String lastname;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;department_id&quot;, nullable = false)
+    private Department department;
+
+    public Long getId() {
+<span class="nc" id="L28">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="fc" id="L32">        this.id = id;</span>
+<span class="fc" id="L33">    }</span>
+
+    public String getFirstname() {
+<span class="nc" id="L36">        return firstname;</span>
+    }
+
+    public void setFirstname(String firstname) {
+<span class="fc" id="L40">        this.firstname = firstname;</span>
+<span class="fc" id="L41">    }</span>
+
+    public String getLastname() {
+<span class="fc" id="L44">        return lastname;</span>
+    }
+
+    public void setLastname(String lastname) {
+<span class="fc" id="L48">        this.lastname = lastname;</span>
+<span class="fc" id="L49">    }</span>
+
+    public Department getDepartment() {
+<span class="fc" id="L52">        return department;</span>
+    }
+
+    public void setDepartment(Department department) {
+<span class="fc" id="L56">        this.department = department;</span>
+<span class="fc" id="L57">    }</span>
+
+    public static Builder builder() {
+<span class="fc" id="L60">        return new Builder();</span>
+    }
+
+    public static final class Builder {
+        private Long id;
+        private String firstname;
+        private String lastname;
+        private Department department;
+
+        private Builder() {
+        }
+
+        public Builder id(Long id) {
+<span class="fc" id="L73">            this.id = id;</span>
+<span class="fc" id="L74">            return this;</span>
+        }
+
+        public Builder firstname(String firstname) {
+<span class="fc" id="L78">            this.firstname = firstname;</span>
+<span class="fc" id="L79">            return this;</span>
+        }
+
+        public Builder lastname(String lastname) {
+<span class="fc" id="L83">            this.lastname = lastname;</span>
+<span class="fc" id="L84">            return this;</span>
+        }
+
+        public Builder department(Department department) {
+<span class="fc" id="L88">            this.department = department;</span>
+<span class="fc" id="L89">            return this;</span>
+        }
+
+        public Student build() {
+<span class="fc" id="L93">            Student student = new Student();</span>
+<span class="fc" id="L94">            student.setId(id);</span>
+<span class="fc" id="L95">            student.setFirstname(firstname);</span>
+<span class="fc" id="L96">            student.setLastname(lastname);</span>
+<span class="fc" id="L97">            student.setDepartment(department);</span>
+<span class="fc" id="L98">            return student;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

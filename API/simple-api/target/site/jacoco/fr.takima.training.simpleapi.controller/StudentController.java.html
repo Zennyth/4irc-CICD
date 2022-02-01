@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StudentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">simple-api</a> &gt; <a href="index.source.html" class="el_package">fr.takima.training.simpleapi.controller</a> &gt; <span class="el_source">StudentController.java</span></div><h1>StudentController.java</h1><pre class="source lang-java linenums">package fr.takima.training.simpleapi.controller;
+
+import fr.takima.training.simpleapi.entity.Student;
+import fr.takima.training.simpleapi.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Optional;
+
+@RestController
+@CrossOrigin
+@RequestMapping(value = &quot;/students&quot;)
+public class StudentController {
+    private StudentService studentService;
+
+    @Autowired
+<span class="nc" id="L20">    public StudentController(StudentService studentService) {</span>
+<span class="nc" id="L21">        this.studentService = studentService;</span>
+<span class="nc" id="L22">    }</span>
+
+    @GetMapping(value = &quot;/&quot;)
+    public ResponseEntity&lt;Object&gt; getStudents() {
+<span class="nc" id="L26">        return  ResponseEntity.ok(studentService.getAll());</span>
+    }
+
+    @GetMapping(value = &quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; getStudentById(@PathVariable(name=&quot;id&quot;) long id) {
+<span class="nc" id="L31">        Optional&lt;Student&gt; studentOptional = Optional.ofNullable(this.studentService.getStudentById(id));</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (!studentOptional.isPresent()) {</span>
+<span class="nc" id="L33">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="nc" id="L35">        return  ResponseEntity.ok(studentOptional.get());</span>
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;Object&gt; addStudent(@RequestBody Student student) {
+        Student savedStudent;
+        try {
+<span class="nc" id="L42">            savedStudent = this.studentService.addStudent(student);</span>
+<span class="nc" id="L43">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L44">            return ResponseEntity.badRequest().build();</span>
+<span class="nc" id="L45">        }</span>
+
+<span class="nc" id="L47">        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path(&quot;/{id}&quot;)</span>
+<span class="nc" id="L48">                .buildAndExpand(savedStudent.getId()).toUri();</span>
+<span class="nc" id="L49">        return ResponseEntity.created(location).build();</span>
+    }
+
+    @PutMapping(value = &quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; updateStudent(@RequestBody Student student, @PathVariable(name=&quot;id&quot;) long id) {
+<span class="nc" id="L54">        Optional&lt;Student&gt; studentOptional = Optional.ofNullable(studentService.getStudentById(id));</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!studentOptional.isPresent()) {</span>
+<span class="nc" id="L56">            return ResponseEntity.notFound().build();</span>
+        }
+
+<span class="nc" id="L59">        student.setId(id);</span>
+<span class="nc" id="L60">        this.studentService.addStudent(student);</span>
+<span class="nc" id="L61">        return ResponseEntity.ok(student);</span>
+    }
+
+    @DeleteMapping(value = &quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; removeStudent(@PathVariable(name=&quot;id&quot;) long id) {
+<span class="nc" id="L66">        Optional&lt;Student&gt; studentOptional = Optional.ofNullable(studentService.getStudentById(id));</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (!studentOptional.isPresent()) {</span>
+<span class="nc" id="L68">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="nc" id="L70">        this.studentService.removeStudentById(id);</span>
+
+<span class="nc" id="L72">        return ResponseEntity.ok().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
