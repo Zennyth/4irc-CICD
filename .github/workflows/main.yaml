@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: ./API/simple-ap
+          context: ./API/simple-api
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/simple-api:1.0
           push: ${{ github.ref == 'refs/heads/master' }}
