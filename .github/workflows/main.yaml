@@ -55,7 +55,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: ./Http server
+          context: ./HTTP server
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/http:1.0
           push: ${{ github.ref == 'refs/heads/master' }}
