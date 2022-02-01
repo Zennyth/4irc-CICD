@@ -21,15 +21,17 @@ jobs:
           # On utilise la version 11 avec la distribution adopt
           java-version: '11'
           distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v2
       - name: Analyze with sonar
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=1c6a274c-6721-477b-b100-4dd4cad0218c -Dsonar.organization=962bde7e-6cb4-4bbf-8a53-f5b1616deaf1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{secrets.SONAR_TOKEN }} --file ./API/simple-api
       #finally build your app with the latest command
-      - name: Build and test with Maven
+      # - name: Build and test with Maven
         # build and test the java project
-        run: mvn clean verify --file ./API/simple-api
+        # run: mvn clean verify --file ./API/simple-api
   
   # define job to build and publish docker image
   build-and-push-docker-image:
