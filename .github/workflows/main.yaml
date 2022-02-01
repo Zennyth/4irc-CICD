@@ -42,7 +42,7 @@ jobs:
           context: ./API/simple-ap
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/simple-api:1.0
-          push: ${{ github.ref == 'refs/heads/master }}
+          push: ${{ github.ref == 'refs/heads/master' }}
       - name: Build image and push database
         uses: docker/build-push-action@v2
         with:
@@ -50,7 +50,7 @@ jobs:
           context: ./Database
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/my-database:1.0
-          push: ${{ github.ref == 'refs/heads/master }}
+          push: ${{ github.ref == 'refs/heads/master' }}
       - name: Build image and push httpd
         uses: docker/build-push-action@v2
         with:
@@ -58,4 +58,4 @@ jobs:
           context: ./Http server
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/http:1.0
-          push: ${{ github.ref == 'refs/heads/master }}
+          push: ${{ github.ref == 'refs/heads/master' }}
