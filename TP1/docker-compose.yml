@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  tp1-api:
+    build: 
+      ./API/simple-api-test
+    networks:
+      - tp1
+    depends_on:
+      - tp1-database
+  tp1-database:
+    build:
+      ./Database
+    networks:
+      - tp1
+  httpd:
+    build:
+      ./HTTP server
+    ports:
+      - "80:80"
+    networks:
+      - tp1
+    depends_on:
+      - tp1-api
+networks:
+  tp1:
