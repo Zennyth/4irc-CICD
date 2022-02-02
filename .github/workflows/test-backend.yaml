@@ -35,7 +35,7 @@ jobs:
   
   call-workflow:
     needs: test-backend
-    uses: Zennyth/4irc-CICD/.github/workflows/main.yml@master 
+    uses: Zennyth/4irc-CICD/.github/workflows/main.yaml@master 
     secrets:
       DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
