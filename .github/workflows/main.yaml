@@ -9,7 +9,6 @@ on:
         required: true
 jobs:
   build-and-push-database:
-    needs: test-backend
     runs-on: ubuntu-latest
     env:
       working-directory: ./Database
@@ -28,7 +27,6 @@ jobs:
           push: ${{ github.ref == 'refs/heads/master' }}
 
   build-and-push-simple-api:
-    needs: test-backend
     runs-on: ubuntu-latest
     env:
       working-directory: ./API/simple-api
@@ -49,7 +47,6 @@ jobs:
 
   
   build-and-push-http-server:
-    needs: test-backend
     runs-on: ubuntu-latest
     env:
       working-directory: ./HTTP server
