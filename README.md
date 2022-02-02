@@ -48,7 +48,7 @@ Cela nous évite de télécharger les dépendances sur le docker qui fat tourner
     COPY index.html /usr/local/apache2/htdocs/
     COPY httpd.conf /usr/local/apache2/conf/
     EXPOSE 80
-
+```xml
     # httpd.conf
     LoadModule proxy_module modules/mod_proxy.so
     LoadModule proxy_http_module modules/mod_proxy_http.so
@@ -59,7 +59,7 @@ Cela nous évite de télécharger les dépendances sur le docker qui fat tourner
         ProxyPass / http://tp1-api:8080/
         ProxyPassReverse / http://tp1-api:8080/
     </VirtualHost>
-
+```
     docker build -t http .
     docker run -p 80:80 --network tp1 --name http http
     docker cp http:/usr/local/apache2/conf/httpd.conf .
@@ -69,7 +69,7 @@ Cela nous évite de télécharger les dépendances sur le docker qui fat tourner
 Un reverse proxy sert d’intermédiaire entre les clients et les ressources du serveur, il permet de gérer les connections/requêtes pour les rediriger et/ou les bloquer.
 
 ### Docker-compose
-
+```yml
     version: '3.3'
     # Liste des conteneurs
     services:
@@ -109,7 +109,7 @@ Un reverse proxy sert d’intermédiaire entre les clients et les ressources du 
     networks:
       # Création du réseau tp1
       tp1:
-
+```
 > Why is docker-compose so important ?
 
 Docker-compose permet d’automatiser le lancement des conteneurs, deplus il permet de réduire les erreurs concernant la configuration des réseaux par exemple.
@@ -121,10 +121,10 @@ Docker-compose permet d’automatiser le lancement des conteneurs, deplus il per
     docker-compose down # Supprimmer les conteneurs PublishPublish
 
 ### Publish
-
+```Docker
     docker tag tp1_tp1-api zennyth/api:1.0
     docker push zennyth/api:1.0
-    ...
+```
 
 > Why do we put our images into an online repository ?
 
@@ -150,7 +150,7 @@ Ce sont des librairies java qui permettent de lancer des conteneurs pendant les 
 > and you will see !
 
 Eviter de build les dockers si jamais les tests n’étaient pas validé
-```
+```yml
     name: CI devops 2022 CPE
     on:
       #to begin you want to launch this job in main and develop
@@ -228,7 +228,7 @@ Pour éviter de build les images docker si notre api ne passe pas les tests, cel
 Garder une trace du code avec une version qui marche
 
 #### Sonar
-
+```yml
     name: CI devops 2022 CPE
     on:
       #to begin you want to launch this job in main and develop
@@ -296,9 +296,9 @@ Garder une trace du code avec une version qui marche
               tags: ${{secrets.DOCKERHUB_USERNAME}}/http:1.0
               push: ${{ github.ref == 'refs/heads/master' }}
 
-
-### Going further
 ```
+### Going further
+```yml
 name: CI devops 2022 CPE
 on:
   #to begin you want to launch this job in main and develop
@@ -348,7 +348,7 @@ CI/CD TP3 - Docker
 
 Intro
 -----
-```
+```yml
     all:
       vars:
         # utilisateur courrant
@@ -369,7 +369,7 @@ Intro
 
 Playbooks
 ---------
-```
+```yml
     - hosts: all
       gather_facts: false
       become: yes
@@ -389,4 +389,22 @@ Playbooks
         image: zennyth/simple-api:latest
         networks:
           - name: network
+```
+
+Front
+---------
+
+```xml
+    # httpd.conf
+    LoadModule proxy_module modules/mod_proxy.so
+    LoadModule proxy_http_module modules/mod_proxy_http.so
+    
+    ServerName localhost
+    <VirtualHost *:80>
+        ProxyPreserveHost On
+        ProxyPass /api http://tp1-api:8080/
+        ProxyPassReverse /api http://tp1-api:8080/
+        ProxyPass / http://front:80/
+        ProxyPassReverse / http://front:80/
+    </VirtualHost>
 ```
