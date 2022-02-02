@@ -1,6 +1,13 @@
 version: '3.3'
 services:
-  tp1-api:
+  tp1-api-1:
+    build: 
+      ./API/simple-api
+    networks:
+      - tp1
+    depends_on:
+      - tp1-database
+  tp1-api-2:
     build: 
       ./API/simple-api
     networks:
@@ -20,13 +27,15 @@ services:
     networks:
       - tp1
     depends_on:
-      - tp1-api
+      - tp1-api-1
+      - tp1-api-2
   front:
     build:
       ./devops-front-main
     networks:
       - tp1
     depends_on:
-      - tp1-api
+      - tp1-api-1
+      - tp1-api-2
 networks:
   tp1:

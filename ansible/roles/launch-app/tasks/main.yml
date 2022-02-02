@@ -1,6 +1,13 @@
 - name: Create App
   docker_container:
-    name: tp1-api
+    name: tp1-api-1
+    image: zennyth/simple-api:latest
+    networks:
+      - name: network
+
+- name: Create App
+  docker_container:
+    name: tp1-api-2
     image: zennyth/simple-api:latest
     networks:
       - name: network
