@@ -1,0 +1,30 @@
+name: Deploy application
+on:
+  workflow_run:
+    workflows: ["Build and push images"]
+    types:
+      - completed
+    branches: ['master']
+  pull_request:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ./ansible/main.yaml
+          key: ${{secrets.SERVER_RSA}}
+          inventory: |
+            all:
+              vars:
+                ansible_user: centos
+              children:
+                prod:
+                  hosts: mathis.figuet.takima.cloud
