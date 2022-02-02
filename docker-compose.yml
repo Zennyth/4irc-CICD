@@ -2,7 +2,7 @@ version: '3.3'
 services:
   tp1-api:
     build: 
-      ./API/simple-api-test
+      ./API/simple-api
     networks:
       - tp1
     depends_on:
@@ -17,6 +17,13 @@ services:
       ./HTTP server
     ports:
       - "80:80"
+    networks:
+      - tp1
+    depends_on:
+      - tp1-api
+  front:
+    build:
+      ./devops-front-main
     networks:
       - tp1
     depends_on:

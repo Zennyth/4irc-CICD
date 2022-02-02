@@ -1,0 +1,8 @@
+- name: Create database
+  docker_container:
+    name: tp1-database
+    image: zennyth/my-database:1.0
+    networks:
+      - name: network
+    volumes:
+      - /data
