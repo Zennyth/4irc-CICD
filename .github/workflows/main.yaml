@@ -55,7 +55,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./Database
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/my-database:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/my-database:latest
           push: ${{ github.ref == 'refs/heads/master' }}
 
   build-and-push-simple-api:
@@ -75,7 +75,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./API/simple-api
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/simple-api:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/simple-api:latest
           push: ${{ github.ref == 'refs/heads/master' }}
 
   
@@ -95,5 +95,5 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./HTTP server
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/http:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/http:latest
           push: ${{ github.ref == 'refs/heads/master' }}
