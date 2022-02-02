@@ -1,7 +1,7 @@
 - name: Create proxy
   docker_container:
     name: proxy
-    image: zennyth/http:1.0
+    image: zennyth/http:latest
     networks:
       - name: network
     ports:

@@ -1,6 +1,6 @@
 - name: Create front
   docker_container:
     name: front
-    image: zennyth/front:1.0
+    image: zennyth/front:latest
     networks:
       - name: network
