@@ -408,3 +408,23 @@ Front
         ProxyPassReverse / http://front:80/
     </VirtualHost>
 ```
+
+Load Balancing
+--------------
+```xml
+<Proxy "balancer://myApi">
+    BalancerMember "http://tp1-api-1:8080/"
+    BalancerMember "http://tp1-api-2:8080/"
+</Proxy>
+
+ServerName localhost
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyPass /api balancer://myApi
+    ProxyPassReverse /api balancer://myApi
+    ProxyPass / http://front:80/
+    ProxyPassReverse / http://front:80/
+</VirtualHost>
+```
+
+Graphana
