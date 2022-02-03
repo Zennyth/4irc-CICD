@@ -44,6 +44,4 @@ jobs:
     needs: call-workflow
     uses: Zennyth/4irc-CICD/.github/workflows/deploy.yaml@master 
     secrets:
-      DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-      DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
       SERVER_RSA: ${{secrets.SERVER_RSA}}
