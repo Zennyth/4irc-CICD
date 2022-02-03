@@ -3,6 +3,7 @@
   become: yes
   roles:
     - docker
+    - remove-containers
     - create-network
     - launch-database
     - launch-app
